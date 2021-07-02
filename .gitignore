@@ -1,0 +1,5 @@
+**/CMakeFiles/*
+**.a
+**.cmake
+**/CMakeCache.txt
+source/libtorch/
