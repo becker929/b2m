@@ -21,7 +21,7 @@ Start from enclosing folder of this Readme.
 
 $ cd source
 
-$ cmake ./libtorch/share/cmake/Torch .
+$ cmake -DCMAKE_PREFIX_PATH=./libtorch/share/cmake/Torch .
 
 $ make
 
