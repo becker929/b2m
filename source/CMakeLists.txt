@@ -133,8 +133,8 @@ add_library(midiout STATIC midiout.cpp)
 target_link_libraries(midiout RtMidi17) 
 set_property(TARGET midiout PROPERTY CXX_STANDARD 14)
 
-add_executable(test test_lib.cpp)
-target_link_libraries(test stft_nn_lib midiout
+add_executable(b2m_app b2m_app.cpp)
+target_link_libraries(b2m_app stft_nn_lib midiout
                       stft_nn_lib ${cs} ${cf} ${au} ${at} ${ca} 
                       "/usr/local/lib/libportaudio.a")
-set_property(TARGET test PROPERTY CXX_STANDARD 14)
+set_property(TARGET b2m_app PROPERTY CXX_STANDARD 14)

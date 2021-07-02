@@ -65,6 +65,18 @@ CMAKE_BINARY_DIR = /Users/macadmin/Desktop/b2m/source
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/Cellar/cmake/3.20.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/Cellar/cmake/3.20.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -118,18 +130,6 @@ list_install_components:
 list_install_components/fast: list_install_components
 .PHONY : list_install_components/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/local/Cellar/cmake/3.20.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/local/Cellar/cmake/3.20.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macadmin/Desktop/b2m/source/CMakeFiles /Users/macadmin/Desktop/b2m/source//CMakeFiles/progress.marks
@@ -162,19 +162,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named midiout
-
-# Build rule for target.
-midiout: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 midiout
-.PHONY : midiout
-
-# fast build rule for target.
-midiout/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/midiout.dir/build.make CMakeFiles/midiout.dir/build
-.PHONY : midiout/fast
-
-#=============================================================================
 # Target rules for targets named stft_nn_lib
 
 # Build rule for target.
@@ -186,6 +173,32 @@ stft_nn_lib: cmake_check_build_system
 stft_nn_lib/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stft_nn_lib.dir/build.make CMakeFiles/stft_nn_lib.dir/build
 .PHONY : stft_nn_lib/fast
+
+#=============================================================================
+# Target rules for targets named b2m_app
+
+# Build rule for target.
+b2m_app: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 b2m_app
+.PHONY : b2m_app
+
+# fast build rule for target.
+b2m_app/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/b2m_app.dir/build.make CMakeFiles/b2m_app.dir/build
+.PHONY : b2m_app/fast
+
+#=============================================================================
+# Target rules for targets named midiout
+
+# Build rule for target.
+midiout: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 midiout
+.PHONY : midiout
+
+# fast build rule for target.
+midiout/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/midiout.dir/build.make CMakeFiles/midiout.dir/build
+.PHONY : midiout/fast
 
 #=============================================================================
 # Target rules for targets named RtMidi17
@@ -200,18 +213,29 @@ RtMidi17/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RtMidi17.dir/build.make CMakeFiles/RtMidi17.dir/build
 .PHONY : RtMidi17/fast
 
-#=============================================================================
-# Target rules for targets named test
+b2m_app.o: b2m_app.cpp.o
+.PHONY : b2m_app.o
 
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
+# target to build an object file
+b2m_app.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/b2m_app.dir/build.make CMakeFiles/b2m_app.dir/b2m_app.cpp.o
+.PHONY : b2m_app.cpp.o
 
-# fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+b2m_app.i: b2m_app.cpp.i
+.PHONY : b2m_app.i
+
+# target to preprocess a source file
+b2m_app.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/b2m_app.dir/build.make CMakeFiles/b2m_app.dir/b2m_app.cpp.i
+.PHONY : b2m_app.cpp.i
+
+b2m_app.s: b2m_app.cpp.s
+.PHONY : b2m_app.s
+
+# target to generate assembly for a file
+b2m_app.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/b2m_app.dir/build.make CMakeFiles/b2m_app.dir/b2m_app.cpp.s
+.PHONY : b2m_app.cpp.s
 
 include/rtmidi17/reader.o: include/rtmidi17/reader.cpp.o
 .PHONY : include/rtmidi17/reader.o
@@ -333,30 +357,6 @@ stft_nn.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stft_nn_lib.dir/build.make CMakeFiles/stft_nn_lib.dir/stft_nn.cpp.s
 .PHONY : stft_nn.cpp.s
 
-test_lib.o: test_lib.cpp.o
-.PHONY : test_lib.o
-
-# target to build an object file
-test_lib.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test_lib.cpp.o
-.PHONY : test_lib.cpp.o
-
-test_lib.i: test_lib.cpp.i
-.PHONY : test_lib.i
-
-# target to preprocess a source file
-test_lib.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test_lib.cpp.i
-.PHONY : test_lib.cpp.i
-
-test_lib.s: test_lib.cpp.s
-.PHONY : test_lib.s
-
-# target to generate assembly for a file
-test_lib.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test_lib.cpp.s
-.PHONY : test_lib.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -370,9 +370,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... RtMidi17"
+	@echo "... b2m_app"
 	@echo "... midiout"
 	@echo "... stft_nn_lib"
-	@echo "... test"
+	@echo "... b2m_app.o"
+	@echo "... b2m_app.i"
+	@echo "... b2m_app.s"
 	@echo "... include/rtmidi17/reader.o"
 	@echo "... include/rtmidi17/reader.i"
 	@echo "... include/rtmidi17/reader.s"
@@ -388,9 +391,6 @@ help:
 	@echo "... stft_nn.o"
 	@echo "... stft_nn.i"
 	@echo "... stft_nn.s"
-	@echo "... test_lib.o"
-	@echo "... test_lib.i"
-	@echo "... test_lib.s"
 .PHONY : help
 
 
